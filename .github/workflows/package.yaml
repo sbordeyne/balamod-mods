@@ -22,13 +22,14 @@ jobs:
           rm -f ${{inputs.mod}}-tmp/.gitattributes
           rm -f ${{inputs.mod}}-tmp/.editorconfig
           rm -f ${{inputs.mod}}-tmp/*.md
-          tar -czf ${{inputs.mod}}.tar.gz ${{inputs.mod}}-tmp/*
+          cd ${{inputs.mod}}-tmp
+          tar -czf ${{inputs.mod}}.tar.gz *
       - name: Push pkg to release assets
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ inputs.upload-url }}
-          asset_path: ${{inputs.mod}}.tar.gz
+          asset_path: ${{inputs.mod}}-tmp/${{inputs.mod}}.tar.gz
           asset_name: ${{inputs.mod}}.tar.gz
           asset_content_type: application/octet-stream
