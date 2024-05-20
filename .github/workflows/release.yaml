@@ -3,6 +3,9 @@ on:
     types:
       - created
 
+permissions:
+  contents: write
+
 jobs:
   get-release:
     runs-on: ubuntu-latest
