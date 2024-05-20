@@ -4,13 +4,27 @@ on:
       - created
 
 jobs:
+  get-release:
+    runs-on: ubuntu-latest
+    outputs:
+      upload_url: ${{ steps.get_current_release.outputs.upload_url }}
+    steps:
+      - name: Get Current Release
+        id: get_current_release
+        uses: joutvhu/get-release@v1
+        with:
+          debug: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   release:
+    needs: get-release
     strategy:
       matrix:
-        package:
+        mod:
           - my_mod
           - quick_reroll
           - restarter
     uses: ./.github/workflows/package.yaml
     with:
-      package: ${{ matrix.package }}
+      mod: ${{ matrix.mod }}
+      upload-url: ${{ needs.get-release.outputs.upload_url }}

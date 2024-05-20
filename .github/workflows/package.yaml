@@ -1,7 +1,10 @@
 on:
   workflow_call:
     inputs:
-      package:
+      mod:
+        type: string
+        required: true
+      upload-url:
         type: string
         required: true
 
@@ -10,22 +13,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Get Current Release
-        id: get_current_release
-        uses: joutvhu/get-release@v1
-        with:
-          debug: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Package mod ${{package}} into tarball
+      - name: Package mod ${{inputs.mod}} into tarball
         run: |
-          tar -czf ${{package}}.tar.gz ${{package}}
+          tar -czf ${{inputs.mod}}.tar.gz ${{inputs.mod}}
       - name: Push pkg to release assets
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.get_current_release.outputs.upload_url }}
-          asset_path: ${{package}}.tar.gz
-          asset_name: ${{package}}.tar.gz
+          upload_url: ${{ inputs.upload_url }}
+          asset_path: ${{inputs.mod}}.tar.gz
+          asset_name: ${{inputs.mod}}.tar.gz
           asset_content_type: application/octet-stream
