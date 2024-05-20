@@ -15,7 +15,14 @@ jobs:
       - uses: actions/checkout@v4
       - name: Package mod ${{inputs.mod}} into tarball
         run: |
-          tar -czf ${{inputs.mod}}.tar.gz ${{inputs.mod}}
+          mkdir ${{inputs.mod}}-tmp
+          cp -r ${{inputs.mod}}/* ${{inputs.mod}}-tmp
+          rm -rf ${{inputs.mod}}-tmp/.github
+          rm -f ${{inputs.mod}}-tmp/.gitignore
+          rm -f ${{inputs.mod}}-tmp/.gitattributes
+          rm -f ${{inputs.mod}}-tmp/.editorconfig
+          rm -f ${{inputs.mod}}-tmp/*.md
+          tar -czf ${{inputs.mod}}.tar.gz ${{inputs.mod}}-tmp/*
       - name: Push pkg to release assets
         uses: actions/upload-release-asset@v1
         env:
