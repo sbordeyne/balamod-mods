@@ -1,0 +1,16 @@
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  release:
+    strategy:
+      matrix:
+        package:
+          - my_mod
+          - quick_reroll
+          - restarter
+    uses: ./.github/workflows/package.yaml
+    with:
+      package: ${{ matrix.package }}
