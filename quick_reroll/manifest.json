@@ -1,0 +1,11 @@
+{
+    "id": "quick_reroll",
+    "name": "Quick Reroll",
+    "version": "1.0.0",
+    "description": [
+        "Press R in the shop to reroll it"
+    ],
+    "author": "Dogeek <simon.bordeyne@gmail.com>",
+    "load_before": [],
+    "load_after": []
+}

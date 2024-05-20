@@ -1,0 +1,11 @@
+{
+    "id": "my_mod",
+    "name": "My Mod",
+    "version": "1.0.0",
+    "description": [
+        "Balamod is awesome!"
+    ],
+    "author": "Dogeek <simon.bordeyne@gmail.com>",
+    "load_before": [],
+    "load_after": []
+}

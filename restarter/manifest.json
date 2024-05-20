@@ -1,0 +1,11 @@
+{
+    "id": "restarter",
+    "name": "Restarter",
+    "version": "1.0.0",
+    "description": [
+        "Press R to restart the game while on the game over screen"
+    ],
+    "author": "Dogeek <simon.bordeyne@gmail.com>",
+    "load_before": [],
+    "load_after": []
+}
