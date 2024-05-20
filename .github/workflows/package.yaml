@@ -21,7 +21,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ inputs.upload_url }}
+          upload_url: ${{ inputs.upload-url }}
           asset_path: ${{inputs.mod}}.tar.gz
           asset_name: ${{inputs.mod}}.tar.gz
           asset_content_type: application/octet-stream
